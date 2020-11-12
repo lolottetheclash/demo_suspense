@@ -1,36 +1,58 @@
 import './App.css';
+import { useState, useEffect } from 'react';
+
 import User from './components/User';
-import Posts from './components/Posts';
+import fetchData from './fetchData';
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState(null);
+
+  useEffect(() => {
+    fetchData().then(data => {
+      setUser(data.user.data);
+      setPosts(data.posts.data);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <h1>1st Method: Fetch on Render</h1>
+      <h1>2nd Method: Fetch Then Render</h1>
       <ol>
-        <li>Le composant User lance son propre affichage</li>
+        <li>
+          Le composant principal App lance la requête vers l'API pour récupérer
+          l'ensemble des données: Profil du user ainsi que ses Posts
+        </li>
 
         <li>
-          Dans cet affichage se trouve un composant enfant 'POSTS', il doit donc
-          lancer l'affichage de 'POSTS' avant de pouvoir terminer le sien
+          Les 2 requetes User & Posts sont lancées en même temps, on attends que
+          chaque promesse renvoie un résultat avant de faire un setUser &
+          setPosts.
         </li>
         <li>
-          Le composant 'POSTS' est affiché, on passe dans son useEffect pour
-          charger les données
+          Une fois le state mis à jour, les composants User & Posts peuvent
+          alors afficher leurs infos.
         </li>
         <li>
-          Le composant 'POSTS' étant affiché, le composant User peut donc
-          terminer son propre affichage et passer dans son useEffect et charger
-          les données du profil utilisateur.
+          Comparé à "Fetch as Render, on gagne du temps: au lieu de mettre 5s
+          pour afficher les données(2s pour le user et 3s pour les posts, on ne
+          met plus que 3s en tout."
         </li>
-        <li></li>
+        <li>
+          Effectivement, les requêtes étant lancées en même temps, le temps
+          d'affichage est alors la promesse la plus lente a être réoslué, soit
+          3s.
+        </li>
         <p style={{ color: 'red' }}>
-          Inconvénient: on perd du temps car on commence par afficher le
-          composant et ses enfants AVANT de lancer le chargement des données.
-          Dans cet exemple, cela prend 5 secondes en tout pour charger les
-          données.
+          Inconvénient: on est obligé d'attendre la résolution de l'ensemble des
+          requêtes avant de pouvoir afficher quoi que ce soit...
         </p>
       </ol>
-      <User />
+      {user && posts ? (
+        <User user={user} posts={posts} />
+      ) : (
+        <p>Loading data...</p>
+      )}
     </div>
   );
 }
