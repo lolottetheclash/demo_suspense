@@ -7,12 +7,15 @@ import fetchData from './fetchData';
 function App() {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState(null);
+  const [timer, setTimer] = useState(0);
 
   useEffect(() => {
+    const interval = setInterval(() => setTimer(timer => timer + 1), 1000);
     fetchData().then(data => {
       setUser(data.user.data);
       setPosts(data.posts.data);
     });
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -48,6 +51,8 @@ function App() {
           requêtes avant de pouvoir afficher quoi que ce soit...
         </p>
       </ol>
+      {timer >= 3 ? <h2>timer: 3</h2> : <h2>timer: {timer}</h2>}
+
       {user && posts ? (
         <User user={user} posts={posts} />
       ) : (
