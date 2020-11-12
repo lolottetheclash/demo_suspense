@@ -1,8 +1,15 @@
 import './App.css';
 import User from './components/User';
-import Posts from './components/Posts';
+import { useState, useEffect } from 'react';
 
 function App() {
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => setTimer(timer => timer + 1), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="App">
       <h1>1st Method: Fetch on Render</h1>
@@ -30,6 +37,7 @@ function App() {
           données.
         </p>
       </ol>
+      {timer >= 5 ? <h2>timer: 5</h2> : <h2>timer: {timer}</h2>}
       <User />
     </div>
   );
