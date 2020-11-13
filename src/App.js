@@ -1,36 +1,40 @@
 import './App.css';
+import { Suspense, useEffect, useState } from 'react';
 import User from './components/User';
 import Posts from './components/Posts';
+import fetchData from './fetchData';
+
+const resource = fetchData();
 
 function App() {
+  const [timer, setTimer] = useState(0);
+
+  useEffect(() => {
+    const count = setInterval(() => {
+      setTimer(timer => timer + 1);
+    }, 1000);
+  }, []);
+
   return (
     <div className="App">
-      <h1>1st Method: Fetch on Render</h1>
+      <h1>3rd Method: Render As You Fetch</h1>
       <ol>
-        <li>Le composant User lance son propre affichage</li>
-
-        <li>
-          Dans cet affichage se trouve un composant enfant 'POSTS', il doit donc
-          lancer l'affichage de 'POSTS' avant de pouvoir terminer le sien
-        </li>
-        <li>
-          Le composant 'POSTS' est affiché, on passe dans son useEffect pour
-          charger les données
-        </li>
-        <li>
-          Le composant 'POSTS' étant affiché, le composant User peut donc
-          terminer son propre affichage et passer dans son useEffect et charger
-          les données du profil utilisateur.
-        </li>
-        <li></li>
-        <p style={{ color: 'red' }}>
-          Inconvénient: on perd du temps car on commence par afficher le
-          composant et ses enfants AVANT de lancer le chargement des données.
-          Dans cet exemple, cela prend 5 secondes en tout pour charger les
-          données.
+        <p style={{ color: 'green' }}>
+          Avantage: On commence le chargement des données, on lance le
+          chargemernt du rendu, on finit le chargement et le rendu visuel
+          s'adapte au fur et à mesure. L'effet est beaucoup plus agréable pour
+          l'utilisateur: gain de temps de chargement et le user sait ce qu'il se
+          passe.
         </p>
       </ol>
-      <User />
+
+      {timer >= 3 ? <h3>3</h3> : <h3>{timer}</h3>}
+      <Suspense fallback={<h1>Chargement du profil User...</h1>}>
+        <User {...resource} />
+      </Suspense>
+      <Suspense fallback={<h1>Chargement des Posts...</h1>}>
+        <Posts {...resource} />
+      </Suspense>
     </div>
   );
 }
