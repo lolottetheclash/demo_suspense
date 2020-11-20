@@ -21,9 +21,9 @@ const User = () => {
       axios.get('https://jsonplaceholder.typicode.com/users/3').then(res => {
         setUser(res.data);
         setLoading(false);
-        console.log('Les infos du USER sont récupérées 2 secondes plus tard');
+        console.log('Les infos du USER sont récupérées 3 secondes plus tard');
       });
-    }, 2000);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 

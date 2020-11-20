@@ -18,9 +18,9 @@ const Posts = () => {
         .then(res => {
           setPosts(res.data);
           setLoading(false);
-          console.log('Les POSTS sont récupérées 3 secondes plus tard');
+          console.log('Les POSTS sont récupérées 4 secondes plus tard');
         });
-    }, 3000);
+    }, 4000);
     return () => clearTimeout(timer);
   }, []);
 
