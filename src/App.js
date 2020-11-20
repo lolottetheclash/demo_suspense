@@ -37,21 +37,21 @@ function App() {
           alors afficher leurs infos.
         </li>
         <li>
-          Comparé à "Fetch as Render, on gagne du temps: au lieu de mettre 5s
-          pour afficher les données(2s pour le user et 3s pour les posts, on ne
-          met plus que 3s en tout."
+          Comparé à "Fetch as Render, on gagne du temps: au lieu de mettre 7s
+          pour afficher les données(3s pour le user et 4s pour les posts, on ne
+          met plus que 4s en tout."
         </li>
         <li>
           Effectivement, les requêtes étant lancées en même temps, le temps
           d'affichage est alors la promesse la plus lente a être réoslué, soit
-          3s.
+          4s.
         </li>
         <p style={{ color: 'red' }}>
           Inconvénient: on est obligé d'attendre la résolution de l'ensemble des
           requêtes avant de pouvoir afficher quoi que ce soit...
         </p>
       </ol>
-      {timer >= 3 ? <h2>timer: 3</h2> : <h2>timer: {timer}</h2>}
+      {timer >= 4 ? <h2>timer: 4</h2> : <h2>timer: {timer}</h2>}
 
       {user && posts ? (
         <User user={user} posts={posts} />

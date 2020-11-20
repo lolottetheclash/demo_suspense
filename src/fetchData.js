@@ -14,14 +14,14 @@ const axiosDelayed = (url, ms) => {
 
 // Axios request to get user details => returns a promise
 const fetchUser = () => {
-  return axiosDelayed('https://jsonplaceholder.typicode.com/users/3', 2000);
+  return axiosDelayed('https://jsonplaceholder.typicode.com/users/3', 3000);
 };
 
 // Axios request to get user posts => returns a promise
 const fetchPosts = () => {
   return axiosDelayed(
     'https://jsonplaceholder.typicode.com/users/3/posts',
-    3000
+    4000
   );
 };
 
