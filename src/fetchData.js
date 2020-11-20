@@ -9,7 +9,7 @@ const fetchUser = () => {
           .get('https://jsonplaceholder.typicode.com/users/3')
           .then(res => resolve(res.data))
           .catch(e => console.log(e));
-      }, 2000);
+      }, 3000);
     }
   });
 };
@@ -23,7 +23,7 @@ const fetchPosts = () => {
           .get('https://jsonplaceholder.typicode.com/users/3/posts')
           .then(res => resolve(res.data))
           .catch(e => console.log(e));
-      }, 3000);
+      }, 4000);
     }
   });
 };

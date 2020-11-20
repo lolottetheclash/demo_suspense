@@ -21,14 +21,15 @@ function App() {
       <ol>
         <p style={{ color: 'green' }}>
           Avantage: On commence le chargement des données, on lance le
-          chargemernt du rendu, on finit le chargement et le rendu visuel
-          s'adapte au fur et à mesure. L'effet est beaucoup plus agréable pour
-          l'utilisateur: gain de temps de chargement et le user sait ce qu'il se
-          passe.
+          chargement du rendu, on fini le chargement et le rendu visuel s'adapte
+          au fur et à mesure. <br />
+          <br />
+          L'effet est beaucoup plus agréable pour l'utilisateur: gain de temps
+          de chargement et le user sait ce qu'il se passe.
         </p>
       </ol>
 
-      {timer >= 3 ? <h3>3</h3> : <h3>{timer}</h3>}
+      {timer >= 4 ? <h2>Time: 4</h2> : <h2>Time: {timer}</h2>}
       <Suspense fallback={<h1>Chargement du profil User...</h1>}>
         <User {...resource} />
       </Suspense>
