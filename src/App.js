@@ -4,6 +4,7 @@ import User from './components/User';
 import Posts from './components/Posts';
 import fetchData from './fetchData';
 
+// This is not a Promise. It's a special object from Suspense integration.
 const resource = fetchData();
 
 function App() {

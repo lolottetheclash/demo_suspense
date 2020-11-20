@@ -1,9 +1,6 @@
-import { Suspense } from 'react';
-import Posts from './Posts';
-
 const User = resource => {
+  // Try to read user info, although it might not have loaded yet
   const user = resource.user.read();
-  // const posts = resource.posts.read();
 
   return (
     <div>
@@ -11,9 +8,6 @@ const User = resource => {
       <p>{user.name}</p>
       <p>{user.username}</p>
       <p>{user.email}</p>
-      {/* <Suspense fallback={<h1>Chargement des posts...</h1>}>
-        <Posts posts={posts} />
-      </Suspense> */}
     </div>
   );
 };
