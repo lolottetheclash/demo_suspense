@@ -27,9 +27,11 @@ function App() {
         </li>
         <li>Après 4 secondes, les données des Posts sont chargées.</li>
         <p style={{ color: 'red' }}>
-          Inconvénient: on perd du temps car on commence par afficher le
-          composant AVANT de lancer le chargement des données. Dans cet exemple,
-          cela prend 8 secondes en tout pour charger les données.
+          Inconvénient: <br />
+          on perd du temps car on commence par afficher le composant AVANT de
+          lancer le chargement des données.
+          <br /> Dans cet exemple, cela prend 8 secondes en tout pour charger
+          les données.
         </p>
       </ol>
       {timer >= 7 ? <h2>timer: 7</h2> : <h2>timer: {timer}</h2>}
